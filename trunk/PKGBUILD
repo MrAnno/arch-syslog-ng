@@ -9,7 +9,7 @@ url="https://www.syslog-ng.com/products/open-source-log-management/"
 license=('GPL2' 'LGPL2.1')
 depends=('awk' 'systemd-libs' 'glib2' 'libnsl' 'json-c' 'curl' 'libnet')
 makedepends=('libxslt' 'mongo-c-driver' 'librabbitmq-c' 'python' 'libesmtp' 'hiredis'
-             'libdbi' 'geoip' 'libmaxminddb')
+             'libdbi' 'geoip' 'libmaxminddb' 'java-environment=8' 'gradle')
 checkdepends=('python-nose' 'python-pylint' 'python-ply')
 optdepends=('logrotate: for rotating log files'
             'libdbi: for the SQL plugin'
@@ -20,6 +20,7 @@ optdepends=('logrotate: for rotating log files'
             'hiredis: for the Redis plugin'
             'geoip: for the GeoIP plugin'
             'libmaxminddb: for the GeoIP2 plugin'
+            'java-runtime-headless: for Java-based plugins'
             'python: for Python-based plugins')
 conflicts=('eventlog')
 replaces=('eventlog')
@@ -48,7 +49,7 @@ build() {
     --sbindir=/usr/bin --localstatedir=/var/lib/syslog-ng --datadir=/usr/share \
     --with-pidfile-dir=/run --enable-spoof-source --enable-ipv6 \
     --enable-systemd --with-systemdsystemunitdir=/usr/lib/systemd/system \
-    --enable-manpages --enable-all-modules --disable-java --disable-java-modules  \
+    --enable-manpages --enable-all-modules \
     --disable-riemann --with-python=3 --with-jsonc=system
   make
 }
