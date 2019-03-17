@@ -36,7 +36,10 @@ sha256sums=('a65858afe9c649119a23ff61669945cab8692a045ee8259e8ee666445c8fbda0'
 prepare() {
   cd $pkgname-$pkgver
   sed -i -e 's,/bin/,/usr/bin/,' -e 's,/sbin/,/bin/,' contrib/systemd/syslog-ng@.service
-  sed -i -e 's|etc|etc/syslog-ng|g' -e 's|/var/run|/run|g' contrib/systemd/syslog-ng@default
+  sed -i -e 's|/var/run|/run|g' contrib/systemd/syslog-ng@default
+
+  # remove this line before releasing 3.21.1: https://github.com/balabit/syslog-ng/pull/2632
+  sed -i -e 's|etc|etc/syslog-ng|g' contrib/systemd/syslog-ng@default
 }
 
 build() {
